@@ -2,8 +2,10 @@
 peso = 0
 altura = 0
 edad = 0
-diabetes= 0
-hipertension = 0
+compdiabetes= 0
+comphipertension = 0
+diabetes = bool(False)
+hipertension = bool(False)
 
 
 # Leer los datos desde el archivo si existen
@@ -19,16 +21,26 @@ try:
                 edad = int(linea.split(":")[1].strip().replace("años", ""))
             elif "diabetes:" in linea:
                 d = (linea.split(":")[1].strip())
-                if d == "False":
-                    diabetes = 2
-                if d == "True":
-                    diabetes = 1
+                if d == "2":
+                    compdiabetes = 2
+                if d == "1":
+                    compdiabetes = 1 
+                if compdiabetes== 1:
+                    diabetes = True
+                if compdiabetes == 2:
+                    diabetes = False
+                
             elif "hipertension:" in linea:
                 h = (linea.split(":")[1].strip())
-                if h == "False":
-                    hipertension = 2
-                if h == "True":
-                    hipertension = 1
+                if h == "2":
+                    comphipertension = 2
+                if h == "1":
+                    comphipertension = 1
+                    
+                if comphipertension== 1:
+                    hipertension = True
+                if comphipertension == 2:
+                    hipertension = False
                 
 except FileNotFoundError:
     pass
@@ -40,18 +52,30 @@ if altura == 0:
     altura = float(input("Ingrese su altura en metros: "))
 if edad == 0:
     edad = int(input("Ingrese su edad en años: "))
-if diabetes == 0:
+if compdiabetes == 0:
     d = input("es diabetico? (si/no): ").lower()
     if d == "si":
-        diabetes = 1
+        compdiabetes = 1
     else:
-        diabetes = 2
-if hipertension == 0 :
+        compdiabetes = 2
+        
+    if compdiabetes== 1:
+        diabetes = True
+    if compdiabetes == 2:
+        diabetes = False
+
+if comphipertension == 0 :
     h = input("es hipertenso? (si/no): ").lower()
     if h == "si":
-        hipertension = 1
+        comphipertension = 1
     else:
-        hipertension = 2
+        comphipertension = 2
+        
+    if comphipertension== 1:
+        hipertension = True
+    if comphipertension == 2:
+        hipertension = False
+        
 
 
 # Guardar los datos en un archivo
@@ -59,8 +83,8 @@ with open("datos_usuario.txt", "w") as archivo:
     archivo.write(f"Peso: {peso} kg\n")
     archivo.write(f"Altura: {altura} metros\n")
     archivo.write(f"Edad: {edad} años\n")
-    archivo.write(f"diabetes: {diabetes} \n")
-    archivo.write(f"hipertension: {hipertension} \n")
+    archivo.write(f"diabetes: {compdiabetes} \n")
+    archivo.write(f"hipertension: {comphipertension} \n")
 
 
 print("Datos guardados correctamente en 'datos_usuario.txt'.")
@@ -77,23 +101,34 @@ if actualizar == "si":
     peso = 0
     altura = 0
     edad = 0
-    diabetes = 3
-    hipertension = 3
+    compdiabetes = 0
+    comphipertension = 0
     print("Los datos han sido restablecidos a 0. Por favor, ingrese los nuevos datos.")
     peso = float(input("Ingrese su peso en kg: "))
     altura = float(input("Ingrese su altura en metros: "))
     edad = int(input("Ingrese su edad en años: "))
     d = input("es diabetico? (si/no): ")
     if d == "si":
-        diabetes = 1
+        compdiabetes = 1
     elif d == "no":
-        diabetes = 2
+        compdiabetes = 2
+    
+    if compdiabetes== 1:
+        diabetes = True
+    if compdiabetes == 2:
+        diabetes = False
+    
         
     h = input("es hipertenso? (si/no): ")
     if h == "si":
-        hipertension = 1
+        comphipertension = 1
     else:
-        hipertension = 2
+        comphipertension = 2
+    
+    if comphipertension== 1:
+        hipertension = True
+    if comphipertension == 2:
+        hipertension = False
 
 
     print("Datos almacenados:")
@@ -109,8 +144,8 @@ with open("datos_usuario.txt", "w") as archivo:
     archivo.write(f"Peso: {peso} kg\n")
     archivo.write(f"Altura: {altura} metros\n")
     archivo.write(f"Edad: {edad} años\n")
-    archivo.write(f"diabetes: {diabetes} \n")
-    archivo.write(f"hipertension: {hipertension} \n")
+    archivo.write(f"diabetes: {compdiabetes} \n")
+    archivo.write(f"hipertension: {comphipertension} \n")
 
 
 print("Datos guardados correctamente en 'datos_usuario.txt'.")
